@@ -39,12 +39,12 @@
   - name: download catalouge artifact 
     ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip 
-      dest: /app 
+      dest: /temp
 
   - name: extract catalouge artifact 
     ansible.builtin.unarchive: 
       src: /tmp/catalogue.zip 
       dest: /app 
       remote_src: yes 
-      
+
     
