@@ -49,7 +49,7 @@
   - name: install dependencies
     ansible.builtin.command: npm install 
       args: 
-        chdir: /app 
+       chdir: /app 
 
   - name: copy catalouge service 
     ansible.builtin.service: 
@@ -72,7 +72,7 @@
        
   - name: load catalouge data
     ansible.builtin.command: mongo --host 172.31.34.139 < /app/schema/catalogue.js 
-    
+
   - name: restart catalouge 
     ansible.builtin.service: 
       name: catalouge 
