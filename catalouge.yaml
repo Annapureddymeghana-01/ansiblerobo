@@ -2,10 +2,10 @@
   hosts: catalouge 
   become: yes 
   tasks: 
-  - name: set up NPM source 
+  - name: setup NPM source 
     ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash " 
 
-  - name: Install nodesjs
+  - name: Install nodejs
     ansible.builtin.yum: 
       name: nodejs 
       state: installed 
@@ -25,7 +25,13 @@
     ansible.builtin.stat: 
       path: /app
     register: directory 
-     
+
   - name: print the directory stats 
     ansible.builtin.debug: 
-      msg: "output: {{directory}}" 
+      msg: "output: {{directory}}"  
+
+  - when: directory.stat.exist == False
+    name: create /app directory 
+    ansible.builtin.file:
+      path: /app
+      state: directory
