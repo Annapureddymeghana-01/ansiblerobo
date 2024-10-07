@@ -56,9 +56,9 @@
       src: catalouge.service
       dest: /etc/systemd/system/catalogue.service  
 
-  - name: deamon reload
+  - name: daemon reload
     ansible.builtin.systemd:
-      deamon_reload: true 
+      daemon_reload: true 
 
   - name: copy mongo repo to yum.repos.d 
     ansible.builtin.copy: 
