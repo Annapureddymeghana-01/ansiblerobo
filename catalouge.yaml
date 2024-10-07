@@ -48,8 +48,8 @@
       remote_src: yes 
   - name: install dependencies
     ansible.builtin.command: npm install 
-      args: 
-        chdir: /app 
+    args: 
+      chdir: /app 
 
   - name: copy catalouge service 
     ansible.builtin.service: 
