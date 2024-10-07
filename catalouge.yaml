@@ -9,6 +9,7 @@
     ansible.builtin.yum: 
       name: nodejs 
       state: installed 
+      disable_gpg_check: true
 
   - name: check roboshop user exist or not
     ansible.builtin.command: id roboshop 
