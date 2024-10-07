@@ -46,5 +46,35 @@
       src: /tmp/catalogue.zip 
       dest: /app 
       remote_src: yes 
+  - name: install dependencies
+    ansible.builtin.command: npm install 
+      args: 
+        chdir: /app 
 
+  - name: copy catalouge service 
+    ansible.builtin.service: 
+      src: catalouge.service
+      dest: /etc/systemd/system/catalogue.service  
+
+  - name: deamon reload
+    ansible.builtin.systemd:
+      deamon_reload: true 
+
+  - name: copy mongo repo to yum.repos.d 
+    ansible.builtin.copy: 
+      src: mongodb.repo 
+      dest: /etc/yum.repos.d/mongo.repo 
+
+  - name: install mongodb
+    ansible.builtin.yum: 
+      name: mongodb-org-shell 
+      state: installed  
+       
+  - name: load catalouge data
+    ansible.builtin.command: mongo --host 172.31.34.139 < /app/schema/catalogue.js 
     
+  - name: restart catalouge 
+    ansible.builtin.service: 
+      name: catalouge 
+      state: restarted 
+      enabled: yes 
